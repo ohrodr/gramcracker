@@ -15,6 +15,7 @@ if __name__ == '__main__':
      description='This will create appropriate grammar files for cracking use')
     parser.add_argument('--verbose', '-v', action='count')
     parser.add_argument('--session',metavar='session_name',help='Session Name')
+    parser.add_argument('--filename','-f',metavar='pwlist',help='file of listed passwords')
     args = parser.parse_args()
     g = GrammarGenerator(args.session)
 
@@ -35,19 +36,4 @@ if __name__ == '__main__':
         print grammar.grammar
         print grammar.digits
         print grammar.specials
-
-    proc = subprocess.Popen(
-                   ['/Users/rdriscoll/Downloads/john-1.7.9-jumbo-5-macosx-Intel-2/run/john',
-                    '--stdin','--format=raw-sha1','/Users/rdriscoll/twitter/gits/pw_views/combo_not.txt',
-                   ],
-                   stdout=subprocess.PIPE,
-                   stdin=subprocess.PIPE,
-                   stderr=subprocess.PIPE,
-                    )
-    i = 0
-    while i == 0:
-        output = proc.stdin.write('sex4rent')
-        if output: i += 1
-    
-
 
