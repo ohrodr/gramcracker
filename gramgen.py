@@ -20,14 +20,10 @@ if __name__ == '__main__':
     g = GrammarGenerator(args.session)
 
     # send some passwords
-    g.generate('foo124')
-    g.generate('password')
-    g.generate('foo1')
-    g.generate('foo1392w82345')
-    g.generate('foo1244')
-    g.generate('1234')
-    g.generate('1@#2!3**&(4')
 
+    import fileinput
+    for line in fileinput.input([args.filename]):
+        g.generate(line.rstrip())
     # parse the grammar
     grammar = Grammar(g)
 
