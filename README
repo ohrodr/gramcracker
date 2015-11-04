@@ -1,5 +1,5 @@
 BACKGROUND
-    This is a crack at a grammatical MLR based password cracking system.  This will use probability, and asynchronous behavior to try to mine passwords similar to a gold miner.  BZZZZZrrrRRRttt.
+    This is a crack at a grammar based password password cracking assistant similar to a gold miner.  BZZZZZrrrRRRttt.
 
 USAGE:
     python gramgen.py -v --session=foo -f listofpasswords.txt 
