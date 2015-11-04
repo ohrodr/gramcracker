@@ -63,6 +63,20 @@ class GrammarManager(object):
       self.worker_log[self.current_worker.session].append(self.current_worker)
     self.current_worker = worker
 
+  def _calculate_group(self, result_dict, store_here):
+    """ given a result dict and attr string does math on grammarworker """
+    for x in self._groupings(result_dict):
+      for k, v in result_dict.iteritems():
+        t = self._terminals(result_dict, x)
+        if len(str(k)) == x:
+          tmp_t = v
+          value_attr = getattr(self, store_here)
+          if k not in value_attr:
+            value_attr[k] = float(tmp_t) / t
+          else:
+            value_attr[k] = float(tmp_t) / t
+          setattr(self, store_here, value_attr)
+
   def calculate(self):
     """ this does the actual calculation of the current worker """
     if not self.current_worker:
@@ -82,23 +96,5 @@ class GrammarManager(object):
       line = "%s%s%0.30f" %(micro,'\x09',f4)
       self.grammar[micro] = f4
     
-    # this is next for refactor easily can be a separate method.
-    for x in self._groupings(self.current_worker.digits):
-      for k,v in self.current_worker.digits.iteritems():
-        t =  self._terminals(self.current_worker.digits, x)
-        if len(str(k)) == x:
-          tmp_t = v
-          if k not in self.digits:
-            self.digits[k] = float(tmp_t)/t
-          else:
-            self.digits[k] = float(tmp_t)/t
-
-    for x in self._groupings(self.current_worker.specials):
-      for k,v in self.current_worker.specials.iteritems():
-        t =  self._terminals(self.current_worker.specials, x)
-        if len(str(k)) == x:
-          tmp_t = v
-          if k not in self.specials:
-            self.specials[k] = float(tmp_t)/t
-          else:
-            self.specials[k] = float(tmp_t)/t
+    self._calculate_group(self.current_worker.digits, 'digits')
+    self._calculate_group(self.current_worker.specials, 'specials')
