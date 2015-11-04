@@ -1,5 +1,5 @@
 BACKGROUND
-    This is a crack at a grammar based password password cracking assistant similar to a gold miner.  BZZZZZrrrRRRttt.
+    This is a crack at a grammar based password cracking assistant similar to a gold miner.  BZZZZZrrrRRRttt.
 
 USAGE:
     python gramgen.py -v --session=foo -f listofpasswords.txt 
