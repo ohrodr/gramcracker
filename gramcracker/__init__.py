@@ -1,3 +1,3 @@
 #
-from generator import GrammarGenerator
-from grammar import Grammar
+from generator import GrammarWorker
+from grammar import GrammarManager
