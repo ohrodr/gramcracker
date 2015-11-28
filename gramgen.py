@@ -1,8 +1,16 @@
+#!/usr/bin/python2.7
+""" This script leverages dynamodb pipeline export data to calculate and generate a basic graph.  The idea is to help visualize how this utility library is useful.
+"""
+__author__ = "rodr <rodr@dpustudios.com>"
 import argparse
 import json
 import locale
 import os
 import sys
+import numpy as np
+import scipy.stats as stats
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg 
 
 from gramcracker import GrammarWorker
 from gramcracker import GrammarManager
@@ -39,4 +47,11 @@ if __name__ == '__main__':
   if args.verbose:
     print grammar.grammar
     print grammar.digits
-    print grammar.specials
+    #print grammar.specials
+    hg = grammar.digits.values()
+    hg.sort()
+    hgmean = np.mean(hg)
+    hgstd = np.std(hg)
+    hgpdf = stats.norm.pdf(hg, hgmean, hgstd)
+    plt.plot(hg, hgpdf)
+    plt.savefig('myfig')
